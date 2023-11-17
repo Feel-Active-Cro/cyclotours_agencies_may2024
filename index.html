@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/multi-style-layer.js"></script>
+        <script src="js/leaflet-svg-shape-markers.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/Day2_logistics_1.js"></script>
+        <script src="data/Day2_cycloroute_2.js"></script>
+        <script src="data/POI_may2024DAY2_3.js"></script>
+        <script src="data/DAY1_cycloroute_4.js"></script>
+        <script src="data/POImay2024DAY1_5.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[46.17456799168839,15.973598780353113],[46.3925274444493,16.615235348365356]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_OSMStandard_0');
+        map.getPane('pane_OSMStandard_0').style.zIndex = 400;
+        var layer_OSMStandard_0 = L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            pane: 'pane_OSMStandard_0',
+            opacity: 1.0,
+            attribution: '<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors, CC-BY-SA</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_OSMStandard_0;
+        map.addLayer(layer_OSMStandard_0);
+        function pop_Day2_logistics_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Desc'] !== null ? autolinker.link(feature.properties['Desc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Length'] !== null ? autolinker.link(feature.properties['Length'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Log index'] !== null ? autolinker.link(feature.properties['Log index'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Day2_logistics_1_0() {
+            return {
+                pane: 'pane_Day2_logistics_1',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        function style_Day2_logistics_1_1() {
+            return {
+                pane: 'pane_Day2_logistics_1',
+                opacity: 1,
+                color: 'rgba(48,42,39,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Day2_logistics_1');
+        map.getPane('pane_Day2_logistics_1').style.zIndex = 401;
+        map.getPane('pane_Day2_logistics_1').style['mix-blend-mode'] = 'normal';
+        var layer_Day2_logistics_1 = new L.geoJson.multiStyle(json_Day2_logistics_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Day2_logistics_1',
+            layerName: 'layer_Day2_logistics_1',
+            pane: 'pane_Day2_logistics_1',
+            onEachFeature: pop_Day2_logistics_1,
+            styles: [style_Day2_logistics_1_0,style_Day2_logistics_1_1,]
+        });
+        bounds_group.addLayer(layer_Day2_logistics_1);
+        map.addLayer(layer_Day2_logistics_1);
+        function pop_Day2_cycloroute_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['index'] !== null ? autolinker.link(feature.properties['index'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Length'] !== null ? autolinker.link(feature.properties['Length'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Comment'] !== null ? autolinker.link(feature.properties['Comment'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Day2_cycloroute_2_0(feature) {
+            switch(String(feature.properties['index'])) {
+                case 'a':
+                    return {
+                pane: 'pane_Day2_cycloroute_2',
+                opacity: 1,
+                color: 'rgba(255,3,24,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'b':
+                    return {
+                pane: 'pane_Day2_cycloroute_2',
+                opacity: 1,
+                color: 'rgba(162,17,82,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'b (var2)':
+                    return {
+                pane: 'pane_Day2_cycloroute_2',
+                opacity: 1,
+                color: 'rgba(162,17,82,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'c':
+                    return {
+                pane: 'pane_Day2_cycloroute_2',
+                opacity: 1,
+                color: 'rgba(255,3,24,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'd':
+                    return {
+                pane: 'pane_Day2_cycloroute_2',
+                opacity: 1,
+                color: 'rgba(162,17,82,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'e':
+                    return {
+                pane: 'pane_Day2_cycloroute_2',
+                opacity: 1,
+                color: 'rgba(255,3,24,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'f':
+                    return {
+                pane: 'pane_Day2_cycloroute_2',
+                opacity: 1,
+                color: 'rgba(162,17,82,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'g':
+                    return {
+                pane: 'pane_Day2_cycloroute_2',
+                opacity: 1,
+                color: 'rgba(255,3,24,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_Day2_cycloroute_2',
+                opacity: 1,
+                color: 'rgba(224,139,233,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Day2_cycloroute_2');
+        map.getPane('pane_Day2_cycloroute_2').style.zIndex = 402;
+        map.getPane('pane_Day2_cycloroute_2').style['mix-blend-mode'] = 'normal';
+        var layer_Day2_cycloroute_2 = new L.geoJson(json_Day2_cycloroute_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Day2_cycloroute_2',
+            layerName: 'layer_Day2_cycloroute_2',
+            pane: 'pane_Day2_cycloroute_2',
+            onEachFeature: pop_Day2_cycloroute_2,
+            style: style_Day2_cycloroute_2_0,
+        });
+        bounds_group.addLayer(layer_Day2_cycloroute_2);
+        map.addLayer(layer_Day2_cycloroute_2);
+        function pop_POI_may2024DAY2_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Num'] !== null ? autolinker.link(feature.properties['Num'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['POI Number'] !== null ? autolinker.link(feature.properties['POI Number'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_POI_may2024DAY2_3_0() {
+            return {
+                pane: 'pane_POI_may2024DAY2_3',
+                shape: 'diamond',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(72,123,182,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_POI_may2024DAY2_3');
+        map.getPane('pane_POI_may2024DAY2_3').style.zIndex = 403;
+        map.getPane('pane_POI_may2024DAY2_3').style['mix-blend-mode'] = 'normal';
+        var layer_POI_may2024DAY2_3 = new L.geoJson(json_POI_may2024DAY2_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_POI_may2024DAY2_3',
+            layerName: 'layer_POI_may2024DAY2_3',
+            pane: 'pane_POI_may2024DAY2_3',
+            onEachFeature: pop_POI_may2024DAY2_3,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_POI_may2024DAY2_3_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_POI_may2024DAY2_3);
+        map.addLayer(layer_POI_may2024DAY2_3);
+        function pop_DAY1_cycloroute_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FID'] !== null ? autolinker.link(feature.properties['FID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Duljina'] !== null ? autolinker.link(feature.properties['Duljina'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Naziv'] !== null ? autolinker.link(feature.properties['Naziv'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_DAY1_cycloroute_4_0(feature) {
+            switch(String(feature.properties['FID'])) {
+                case '1':
+                    return {
+                pane: 'pane_DAY1_cycloroute_4',
+                opacity: 1,
+                color: 'rgba(211,15,204,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_DAY1_cycloroute_4',
+                opacity: 1,
+                color: 'rgba(211,15,204,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_DAY1_cycloroute_4',
+                opacity: 1,
+                color: 'rgba(211,15,204,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_DAY1_cycloroute_4',
+                opacity: 1,
+                color: 'rgba(211,15,204,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_DAY1_cycloroute_4',
+                opacity: 1,
+                color: 'rgba(211,15,204,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '6':
+                    return {
+                pane: 'pane_DAY1_cycloroute_4',
+                opacity: 1,
+                color: 'rgba(255,3,24,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '7':
+                    return {
+                pane: 'pane_DAY1_cycloroute_4',
+                opacity: 1,
+                color: 'rgba(255,3,24,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '8':
+                    return {
+                pane: 'pane_DAY1_cycloroute_4',
+                opacity: 1,
+                color: 'rgba(255,3,24,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '9':
+                    return {
+                pane: 'pane_DAY1_cycloroute_4',
+                opacity: 1,
+                color: 'rgba(187,123,206,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '10':
+                    return {
+                pane: 'pane_DAY1_cycloroute_4',
+                opacity: 1,
+                color: 'rgba(42,97,216,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '11':
+                    return {
+                pane: 'pane_DAY1_cycloroute_4',
+                opacity: 1,
+                color: 'rgba(127,120,116,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_DAY1_cycloroute_4',
+                opacity: 1,
+                color: 'rgba(141,249,186,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '12':
+                    return {
+                pane: 'pane_DAY1_cycloroute_4',
+                opacity: 1,
+                color: 'rgba(240,148,9,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_DAY1_cycloroute_4');
+        map.getPane('pane_DAY1_cycloroute_4').style.zIndex = 404;
+        map.getPane('pane_DAY1_cycloroute_4').style['mix-blend-mode'] = 'normal';
+        var layer_DAY1_cycloroute_4 = new L.geoJson(json_DAY1_cycloroute_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_DAY1_cycloroute_4',
+            layerName: 'layer_DAY1_cycloroute_4',
+            pane: 'pane_DAY1_cycloroute_4',
+            onEachFeature: pop_DAY1_cycloroute_4,
+            style: style_DAY1_cycloroute_4_0,
+        });
+        bounds_group.addLayer(layer_DAY1_cycloroute_4);
+        map.addLayer(layer_DAY1_cycloroute_4);
+        function pop_POImay2024DAY1_5(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Num'] !== null ? autolinker.link(feature.properties['Num'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['POI Number'] !== null ? autolinker.link(feature.properties['POI Number'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_POImay2024DAY1_5_0() {
+            return {
+                pane: 'pane_POImay2024DAY1_5',
+                shape: 'diamond',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(72,123,182,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_POImay2024DAY1_5');
+        map.getPane('pane_POImay2024DAY1_5').style.zIndex = 405;
+        map.getPane('pane_POImay2024DAY1_5').style['mix-blend-mode'] = 'normal';
+        var layer_POImay2024DAY1_5 = new L.geoJson(json_POImay2024DAY1_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_POImay2024DAY1_5',
+            layerName: 'layer_POImay2024DAY1_5',
+            pane: 'pane_POImay2024DAY1_5',
+            onEachFeature: pop_POImay2024DAY1_5,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_POImay2024DAY1_5_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_POImay2024DAY1_5);
+        map.addLayer(layer_POImay2024DAY1_5);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/POImay2024DAY1_5.png" /> POI may2024. DAY 1': layer_POImay2024DAY1_5,'DAY 1_cyclo route<br /><table><tr><td style="text-align: center;"': layer_DAY1_cycloroute_4,'<img src="legend/POI_may2024DAY2_3.png" /> POI_may2024. DAY 2': layer_POI_may2024DAY2_3,'Day 2_cyclo route<br /><table><tr><td style="text-align: center;">': layer_Day2_cycloroute_2,'Day 2_logistics': layer_Day2_logistics_1,"OSM Standard": layer_OSMStandard_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        var i = 0;
+        layer_Day2_logistics_1.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Log index'] !== null?String('<div style="color: #323232; font-size: 10pt; font-family: \'Arial\', sans-serif;">' + layer.feature.properties['Log index']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Day2_logistics_1'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Day2_cycloroute_2.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['index'] !== null?String('<div style="color: #323232; font-size: 10pt; font-family: \'Arial\', sans-serif;">' + layer.feature.properties['index']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Day2_cycloroute_2'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_POI_may2024DAY2_3.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['POI Number'] !== null?String('<div style="color: #323232; font-size: 10pt; font-family: \'Arial\', sans-serif;">' + layer.feature.properties['POI Number']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_POI_may2024DAY2_3'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_POImay2024DAY1_5.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['fid'] !== null?String('<div style="color: #323232; font-size: 10pt; font-family: \'Arial\', sans-serif;">' + layer.feature.properties['fid']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_POImay2024DAY1_5'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        resetLabels([layer_Day2_logistics_1,layer_Day2_cycloroute_2,layer_POI_may2024DAY2_3,layer_POImay2024DAY1_5]);
+        map.on("zoomend", function(){
+            resetLabels([layer_Day2_logistics_1,layer_Day2_cycloroute_2,layer_POI_may2024DAY2_3,layer_POImay2024DAY1_5]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_Day2_logistics_1,layer_Day2_cycloroute_2,layer_POI_may2024DAY2_3,layer_POImay2024DAY1_5]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_Day2_logistics_1,layer_Day2_cycloroute_2,layer_POI_may2024DAY2_3,layer_POImay2024DAY1_5]);
+        });
+        </script>
+    </body>
+</html>
